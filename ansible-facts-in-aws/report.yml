@@ -1,0 +1,12 @@
+# Note:
+# This playbook is configured to use existing AWS IAM keys for accessing
+# the sandbox environment provided in this lab.  In order to access the keys,
+# use the variables AWS_ACCESS_KEY and AWS_SECRET_KEY.  A region variable is
+# also provided with AWS_REGION.
+
+--- # Ansible Facts in AWS Lab
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /home/ansible/keys.yml
+  tasks:
