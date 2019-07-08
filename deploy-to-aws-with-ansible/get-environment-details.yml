@@ -1,0 +1,24 @@
+--- # Deploy to AWS with Ansible Supplemental Playbook
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /home/ansible/keys.yml
+  tasks:
+    - name: Get VPC Subnet Facts
+      ec2_vpc_subnet_facts:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        region: "{{ AWS_REGION }}"
+      register: subnet_facts
+    - name: Add subnet id to env_vars.yml
+      lineinfile:
+        path: /home/ansible/env_vars.yml
+        line: "DEFAULT_VPC_SUBNET: {{ subnet_facts.subnets[0].subnet_id }}"
+
+    - name: Get EC2 instance facts
+      ec2_metadata_facts:
+
+    - name: Add security group name to env_vars.yml
+      lineinfile:
+        path: /home/ansible/env_vars.yml
+        line: "SEC_GROUP_NAME: {{ ansible_ec2_security_groups }}"

@@ -1,0 +1,4 @@
+--- # Variables to be used in Deploying to AWS with Ansible Lab
+BUCKET_NAME: placeholder
+AWS_REGION: us-east-1
+AMI_ID: ami-098bb5d92c8886ca1
